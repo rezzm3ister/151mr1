@@ -3,16 +3,17 @@
 using namespace std;
 
 bool isDouble(string s, double& value){
-  //long double ld;
-  //cout<<(std::istringstream(s) >> value >> std::ws).eof();
-  double temp;
+  double temp; //sets a temp variable
   bool check=(istringstream(s) >> temp >> ws).eof();
+  //^checks without whitespaces if the content is all numeric
   if(check==0){
     return false;
+    //returns 0 without updating value
   }
   else{
     value = temp;
     return true;
+    //returns 1 and updating value
   }
 
 }
