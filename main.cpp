@@ -2,15 +2,20 @@
 #include <sstream>
 using namespace std;
 
-bool isDouble(string s, double& value){
+bool isDouble(string s, double& value)
+{
   double temp; //sets a temp variable
   bool check=(istringstream(s) >> temp >> ws).eof();
   //^checks if the content is all numeric ignoring whitespaces
-  if(check==0){
+
+  if(check==0)
+  {
     return false;
     //returns 0 without updating value
   }
-  else{
+
+  else
+  {
     value = temp;
     return true;
     //returns 1 and updating value
@@ -18,7 +23,8 @@ bool isDouble(string s, double& value){
 
 }
 
-int main(){
+int main()
+{
   string in;
   double value=0;
   cout<<"enter string: ";
@@ -26,10 +32,12 @@ int main(){
 
   cout<<"is "<<in<<" a double? \n0=no, 1=yes"<<endl;
   cout<<isDouble(in,value)<<endl;
-  if(isDouble(in,value)==1){
+  if(isDouble(in,value)==1)
+  {
     cout<<"float value: "<<value<<endl;
   }
-  else{
+  else
+  {
     cout<<in<<" is not a double"<<endl;
   }
 
