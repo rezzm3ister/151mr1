@@ -5,7 +5,7 @@ using namespace std;
 bool isDouble(string s, double& value){
   double temp; //sets a temp variable
   bool check=(istringstream(s) >> temp >> ws).eof();
-  //^checks without whitespaces if the content is all numeric
+  //^checks if the content is all numeric ignoring whitespaces
   if(check==0){
     return false;
     //returns 0 without updating value
