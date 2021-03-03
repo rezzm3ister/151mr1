@@ -6,7 +6,11 @@
 using namespace std;
 
 void datain(vector<double> &data){
-  cout<<"hello world";
+  string fname;
+  cout<<"File Name:";
+  getline(fname);
+  
+
 }
 
 
