@@ -7,10 +7,11 @@
 #include "functions.h"
 
 using namespace std;
-
-bool datain(vector<double> &data, char dtype, int &start);
-
 bool isDouble(string s, double& value);
+
+bool datain(vector<double> &data69, char dtype, int &start);
+//bool datainv2(vector<double> &data);
+
 
 
 #endif

@@ -5,35 +5,6 @@
 #include "functions.h"
 using namespace std;
 
-bool datain(std::vector<double> inD, char dtype, int &start)
-{
-  string fname;
-  cout<<"File Name:";
-  getline(cin,fname);
-  string ts;
-  double tempv;
-
-  fstream fin;
-  fin.open(fname);
-  if(!fin){
-    cout<<"error, file not detected. try again.\n";
-    return 0;
-  }
-  else
-  {
-    fin >> start;
-    while(!fin.eof())
-    {
-      fin>>ts;
-      if(isDouble(ts,tempv))
-      {
-        inD.push_back(tempv);
-      }
-    }
-
-  }
-
-}
 
 bool isDouble(string s, double& value)
 {
@@ -55,3 +26,45 @@ bool isDouble(string s, double& value)
   }
 
 }
+
+bool datain(vector<double> &data69, char dtype, double &start)
+{
+  
+  string fname;
+  cout<<"File Name for "<<dtype<<": ";
+  getline(cin,fname);
+  string ts;
+  double tempv;
+
+  fstream fin;
+  fin.open(fname);
+  if(!fin){
+    cout<<"error, file not detected. try again.\n";
+    return 0;
+  }
+  else
+  {
+    fin >> ts;
+    if(!isDouble(ts,tempv))
+    {
+      cout<<"not valid file";
+      return 0;
+    }
+    else
+    {
+      start = tempv;
+    }
+    while(!fin.eof())
+    {
+      fin>>ts;
+      if(isDouble(ts,tempv))
+      {
+        data69.push_back(tempv);
+      }
+    }
+
+  }
+  return 1;
+}
+
+
