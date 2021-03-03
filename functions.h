@@ -2,10 +2,13 @@
 #define FUNCTIONS_H
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
-void datain(vector<double> &data){
+void datain(vector<double> &data)
+{
   string fname;
   cout<<"File Name:";
   getline(fname);
