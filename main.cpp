@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include "functions.h"
+#include "functions.cpp"
 using namespace std;
 
 
