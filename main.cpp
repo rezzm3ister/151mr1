@@ -3,12 +3,21 @@
 #include "functions.h"
 using namespace std;
 
-int main(){
-  //cout<<"hello world"<<endl;
-  //cout<<"test maincpp";
+int main()
+{
   vector<double> xdata;
   vector<double> ydata;
-  datain(xdata);
+  int xstart, ystart;
+  char dtype=x;
+  while(!datain(xdata,dtype,xstart))
+  {
+  }
+
+  while(!datain(ydata,dtype,ystart))
+  {
+  }
+
+
 
   
   
