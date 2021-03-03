@@ -9,7 +9,6 @@ void datain(vector<double> &data){
   string fname;
   cout<<"File Name:";
   getline(fname);
-  cout<<"this is a merge test";
 
 
 }
