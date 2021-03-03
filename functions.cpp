@@ -27,7 +27,7 @@ bool isDouble(string s, double& value)
 
 }
 
-bool datain(vector<double> &data69, char dtype, double &start)
+bool datain(vector<double> &datain, char dtype, double &start)
 {
   
   string fname;
@@ -59,7 +59,7 @@ bool datain(vector<double> &data69, char dtype, double &start)
       fin>>ts;
       if(isDouble(ts,tempv))
       {
-        data69.push_back(tempv);
+        datain.push_back(tempv);
       }
     }
 
