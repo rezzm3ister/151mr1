@@ -5,13 +5,10 @@
 
 using namespace std;
 
-void datain(vector<double> &data){
-  string fname;
-  cout<<"File Name:";
-  getline(fname);
+bool datain(vector<double> &datain, char dtype, double &start);
+//bool datainv2(vector<double> &data);
 
-
-}
-
+int getEnd(int start, int length);
+void removeAve(vector<double> &data);
 
 #endif
