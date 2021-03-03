@@ -13,7 +13,6 @@ int main()
   double xstart, ystart;
   char dtype='x';
   double temp;
-  string str1 = "penis";
  
   while(!datain(xdata, dtype, xstart))
   { //empty since its just an entry check
