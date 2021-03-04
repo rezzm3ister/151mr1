@@ -96,22 +96,22 @@ int main()
   //another function for r_xy ----------------------------------------------------------------
 
   double r_xy_current = 0;
-  int new_x_start = 0;
+  int currentIndex = 0;
 
-  vector<double> r_xy;
+  double r_xy [duration] = {};
 
   for(int i = 0; i < duration; i++)
   {
     r_xy_current = 0;
-    new_x_start = ydata.size() - 1;
+    currentIndex = ydata.size() - 1;
     
     for(int j = 0; j < xdata.size(); j++)
     {
-      r_xy_current = r_xy_current + (new_x[new_x_start] * new_y[new_x_start]);
-      new_x_start++;
+      r_xy_current = r_xy_current + (new_x[currentIndex] * new_y[currentIndex]);
+      currentIndex++;
     }
     
-    r_xy.push_back(r_xy_current);
+    r_xy[i] = r_xy_current;
     new_y.insert(new_y.begin(), 0);
   }
 
@@ -119,14 +119,14 @@ int main()
 
   //cout check ---
   cout << "r_xy = ";
-  for(int i = 0; i < r_xy.size(); i++)
+  for(int i = 0; i < duration; i++)
   {
     cout << r_xy[i] << ",";
   }
   cout << endl;
 
   //new function for finding rho_xy -------------------------------------------------------
-  vector<double> rho_xy;
+  double rho_xy[duration] = {};
 
   //normalization coefficient
   double r_xx = 0, r_yy = 0, normalize = 0;
@@ -145,12 +145,12 @@ int main()
 
   for(int i = 0; i < duration; i++)
   {
-    rho_xy.push_back(r_xy[i] / normalize);
+    rho_xy[i] = r_xy[i] / normalize;
   }
 
   //cout check ---
   cout << "rho_xy = ";
-  for(int i = 0; i < rho_xy.size(); i++)
+  for(int i = 0; i < duration; i++)
   {
     cout << rho_xy[i] << ",";
   }
