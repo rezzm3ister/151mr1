@@ -16,4 +16,6 @@ bool datain(vector<double> &data69, char dtype, int &start);
 int getEnd(int start, int length);
 void removeAve(vector<double> &data);
 
+
+
 #endif
