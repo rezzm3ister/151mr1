@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <math.h>
 #include <fstream>
 #include <sstream>
 #include "functions.h"
@@ -67,4 +68,24 @@ bool datain(vector<double> &datain, char dtype, double &start)
   return 1;
 }
 
+int getEnd(int start, int length)
+{
+  return start + length - 1;
+}
 
+void removeAve(vector<double> &data)
+{
+  double ave = 0;
+  for(int i = 0; i < data.size(); i++)
+  {
+    ave = ave + data[i];
+  }
+
+  ave = ave / data.size();
+  //cout << endl << "ave = " << ave << endl;
+  for(int j = 0; j < data.size(); j++)
+  {
+    data[j] = data[j] - ave;
+    //cout << data[j] << ",";
+  }
+}

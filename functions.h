@@ -13,5 +13,7 @@ bool datain(vector<double> &data69, char dtype, int &start);
 //bool datainv2(vector<double> &data);
 
 
+int getEnd(int start, int length);
+void removeAve(vector<double> &data);
 
 #endif
