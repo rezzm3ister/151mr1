@@ -51,7 +51,10 @@ int main()
   int duration = xdata.size() + ydata.size() - 1;
   vector<double> new_x, new_y;
 
-  //shifted y data
+  shiftx(duration, new_x, xdata, ydata);
+  shifty(duration, new_y, ydata);
+
+  /*//shifted y data
   for(int i = 0; i < ydata.size(); i++)
   {
     new_y.push_back(ydata[i]);
@@ -60,6 +63,7 @@ int main()
   {
     new_y.push_back(0);
   }
+  
 
   //shifted x data
   for(int i = 0; i < ydata.size() - 1; i++)
@@ -74,7 +78,7 @@ int main()
   {
     new_x.push_back(0);
   }
-
+  */
   //cout check ---
 
   cout << "new x = ";
@@ -94,11 +98,13 @@ int main()
 
   //another function for r_xy ----------------------------------------------------------------
 
-  double r_xy_current = 0;
-  int currentIndex = 0;
+  //double r_xy_current = 0;
+  //int currentIndex = 0;
 
-  double r_xy [duration] = {};
-
+  //double r_xy [duration] = {};
+  vector<double> r_xy;
+  getr(duration, r_xy, new_x, xdata, new_y, ydata);
+/*
   for(int i = 0; i < duration; i++)
   {
     r_xy_current = 0;
@@ -110,10 +116,11 @@ int main()
       currentIndex++;
     }
     
-    r_xy[i] = r_xy_current;
+    r_xy.push_back(r_xy_current);
+    //r_xy[i] = r_xy_current;
     new_y.insert(new_y.begin(), 0);
   }
-
+*/
   //return r_xy in actual function maybe
 
   //cout check ---
