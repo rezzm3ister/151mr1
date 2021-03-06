@@ -92,3 +92,19 @@ void removeAve(vector<double> &data)
   }
 }
 
+void removeAve(vector<double> &data)
+{
+  double ave = 0;
+  for(int i = 0; i < data.size(); i++)
+  {
+    ave = ave + data[i];
+  }
+
+  ave = ave / data.size();
+  //cout << endl << "ave = " << ave << endl;
+  for(int j = 0; j < data.size(); j++)
+  {
+    data[j] = data[j] - ave;
+    //cout << data[j] << ",";
+  }
+}

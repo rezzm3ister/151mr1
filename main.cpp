@@ -45,7 +45,10 @@ int main()
     cout<<ydata[i]<<endl;
   }
 
+  int xend = getEnd(xstart, xdata.size());
+  int yend = getEnd(ystart, ydata.size());
 
+  cout << endl << xend << endl << yend << endl;
 
   int xend = getEnd(xstart, xdata.size());
   int yend = getEnd(ystart, ydata.size());
