@@ -5,9 +5,10 @@
 
 using namespace std;
 
-void datain(vector<double> &data){
-  cout<<"hello world";
-}
+bool datain(vector<double> &datain, char dtype, double &start);
 
+int getEnd(int start, int length);
+void removeAve(vector<double> &data);
 
+#endif
 #endif
