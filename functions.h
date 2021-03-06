@@ -17,4 +17,3 @@ int getEnd(int start, int length);
 void removeAve(vector<double> &data);
 
 #endif
-#endif
