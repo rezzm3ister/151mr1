@@ -1,6 +1,9 @@
 #include <iostream>
 #include <vector>
+<<<<<<< HEAD
 #include <math.h>
+=======
+>>>>>>> 6a6616e1fb6a14cbcb79a846ab894c10ddf2d44b
 #include <fstream>
 #include <sstream>
 #include "functions.h"
@@ -68,6 +71,7 @@ bool datain(vector<double> &datain, char dtype, double &start)
   return 1;
 }
 
+<<<<<<< HEAD
 int getEnd(int start, int length)
 {
   return start + length - 1;
@@ -89,3 +93,6 @@ void removeAve(vector<double> &data)
     //cout << data[j] << ",";
   }
 }
+=======
+
+>>>>>>> 6a6616e1fb6a14cbcb79a846ab894c10ddf2d44b
