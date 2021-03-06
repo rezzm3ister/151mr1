@@ -16,13 +16,16 @@ bool datain(vector<double> &data69, char dtype, int &start);
 int getEnd(int start, int length);
 void removeAve(vector<double> &data);
 
-void shiftx(int duration, vector<double> &new_x, vector<double> &xdata, 
+void shiftx(int duration, vector<double> &new_x, vector<double> &xdata,
             vector<double> &ydata);
 void shifty(int duration, vector<double> &new_y, vector<double> ydata);
 
-void getr(int duration, vector<double> &r_xy, vector<double> &new_x, 
+void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
           vector<double> &xdata, vector<double> &new_y, 
           vector<double> &ydata);
-//void getrho();
+void get_rho(int duration, vector<double> &xdata, vector<double> &ydata, 
+            vector<double> &r_xy, vector<double> &rho_xy);
+
+void showdata(vector<double> data,string ttype);
 
 #endif

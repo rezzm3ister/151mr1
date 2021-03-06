@@ -118,7 +118,7 @@ void shifty(int duration, vector<double> &new_y, vector<double> ydata)
   }
 }
 
-void getr(int duration, vector<double> &r_xy, vector<double> &new_x, 
+void get_r(int duration, vector<double> &r_xy, vector<double> &new_x, 
           vector<double> &xdata, vector<double> &new_y, 
           vector<double> &ydata)
 {
@@ -141,4 +141,37 @@ void getr(int duration, vector<double> &r_xy, vector<double> &new_x,
     new_y.insert(new_y.begin(), 0);
   }
   
+}
+
+void get_rho(int duration, vector<double> &xdata, vector<double> &ydata, 
+            vector<double> &r_xy, vector<double> &rho_xy)
+  {
+    double r_xx = 0, r_yy = 0, normalize = 0;
+
+    for(int i = 0; i < xdata.size(); i++)
+    {
+      r_xx = r_xx + (xdata[i]*xdata[i]);
+    }
+
+    for(int i = 0; i < ydata.size(); i++)
+    {
+      r_yy = r_yy + (ydata[i]*ydata[i]);
+    }
+
+    normalize = sqrt(r_xx*r_yy);
+
+    for(int i = 0; i < duration; i++)
+    {
+      rho_xy.push_back(r_xy[i] / normalize);
+    }
+  }
+
+void showdata(vector<double> data, string ttype)
+{
+  cout << ttype << " = ";
+  for(int i = 0; i < data.size(); i++)
+  {
+    cout << data[i] << ", ";
+  }
+  cout << endl;
 }
