@@ -117,8 +117,9 @@ void shifty(int duration, vector<double> &new_y, vector<double> ydata)
   }
 }
 
-void get_r(int duration, vector<double> &r_xy, vector<double> &new_x, 
-vector<double> &xdata, vector<double> &new_y, vector<double> &ydata)
+void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
+          vector<double> &xdata, vector<double> &new_y,
+          vector<double> &ydata)
 {
   double r_xy_current = 0;
   int currentIndex = 0;
@@ -142,8 +143,8 @@ vector<double> &xdata, vector<double> &new_y, vector<double> &ydata)
 }
 
 void get_rho(int duration, vector<double> &xdata, 
-vector<double> &ydata, 
-vector<double> &r_xy, vector<double> &rho_xy)
+              vector<double> &ydata, 
+              vector<double> &r_xy, vector<double> &rho_xy)
   {
     double r_xx = 0, r_yy = 0, normalize = 0;
 
