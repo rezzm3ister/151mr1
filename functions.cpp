@@ -6,14 +6,13 @@
 #include "functions.h"
 using namespace std;
 
-
 bool isDouble(string s, double& value)
 {
   double temp; //sets a temp variable
-  bool check=(istringstream(s) >> temp >> ws).eof();
+  bool check = (istringstream(s) >> temp >> ws).eof();
   //^checks if the content is all numeric ignoring whitespaces
 
-  if(check==0)
+  if(check == 0)
   {
     return false;
     //returns 0 without updating value
@@ -32,14 +31,15 @@ bool datain(vector<double> &datain, char dtype, double &start)
 {
   
   string fname;
-  cout<<"File Name for "<<dtype<<": ";
+  cout << "File Name for " << dtype << ": ";
   getline(cin,fname);
   string ts;
   double tempv;
 
   fstream fin;
   fin.open(fname);
-  if(!fin){
+  if(!fin)
+  {
     cout<<"error, file not detected. try again.\n";
     return 0;
   }
@@ -48,7 +48,7 @@ bool datain(vector<double> &datain, char dtype, double &start)
     fin >> ts;
     if(!isDouble(ts,tempv))
     {
-      cout<<"not valid file";
+      cout << "not valid file";
       return 0;
     }
     else
@@ -63,7 +63,6 @@ bool datain(vector<double> &datain, char dtype, double &start)
         datain.push_back(tempv);
       }
     }
-
   }
   return 1;
 }
@@ -100,7 +99,7 @@ void shiftx(int duration, vector<double> &new_x, vector<double> &xdata, vector<d
   {
     new_x.push_back(xdata[j]);
   }
-  for(int i = 0; i < ydata.size() - 1; i++)
+  for(int k = 0; k < ydata.size() - 1; k++)
   {
     new_x.push_back(0);
   }
@@ -119,8 +118,7 @@ void shifty(int duration, vector<double> &new_y, vector<double> ydata)
 }
 
 void get_r(int duration, vector<double> &r_xy, vector<double> &new_x, 
-          vector<double> &xdata, vector<double> &new_y, 
-          vector<double> &ydata)
+vector<double> &xdata, vector<double> &new_y, vector<double> &ydata)
 {
   double r_xy_current = 0;
   int currentIndex = 0;
@@ -143,8 +141,9 @@ void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
   
 }
 
-void get_rho(int duration, vector<double> &xdata, vector<double> &ydata, 
-            vector<double> &r_xy, vector<double> &rho_xy)
+void get_rho(int duration, vector<double> &xdata, 
+vector<double> &ydata, 
+vector<double> &r_xy, vector<double> &rho_xy)
   {
     double r_xx = 0, r_yy = 0, normalize = 0;
 
