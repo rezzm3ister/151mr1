@@ -28,4 +28,5 @@ void get_rho(int duration, vector<double> &xdata, vector<double> &ydata,
 
 void showdata(vector<double> data,string ttype);
 
+void exportrho(int lag, vector<double> &rho_xy);
 #endif

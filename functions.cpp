@@ -175,3 +175,16 @@ void showdata(vector<double> data, string ttype)
   }
   cout << endl;
 }
+
+void exportrho(int lag, vector<double> &rho_xy)
+{
+  ofstream output;
+  output.open("output_rho.txt");
+  output << lag <<" "<< rho_xy[0]<<endl;
+
+  for(int i=1; i<rho_xy.size(); i-=-1)
+  {
+    output<<rho_xy[i]<<endl;
+  }
+  output.close();
+}

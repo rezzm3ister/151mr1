@@ -77,4 +77,7 @@ int main()
   //cout check ---
   ttype = "rho_xy";
   showdata(rho_xy,ttype);
+
+  //printing rho to txt
+  exportrho(lag, rho_xy);
 }
