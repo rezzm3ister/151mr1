@@ -34,7 +34,7 @@ int main()
   }
   for(int i = 0; i < ydata.size(); i++)
   {
-    cout << "start index: " << ystart << ndl;
+    cout << "start index: " << ystart << endl;
     cout << ydata[i] << endl;
   }
 
