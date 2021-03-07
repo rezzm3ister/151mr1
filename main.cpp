@@ -43,11 +43,6 @@ int main()
 
   cout << endl << xend << endl << yend << endl;
 
-  int xend = getEnd(xstart, xdata.size());
-  int yend = getEnd(ystart, ydata.size());
-
-  cout << endl << xend << endl << yend << endl;
-
   removeAve(xdata);
   removeAve(ydata);
 
@@ -81,16 +76,8 @@ int main()
   
   //cout check ---
   ttype = "rho_xy";
-  showdata(rho_xy, ttype);
+  showdata(rho_xy,ttype);
 
-  // i'll put start, end, duration, cc
-  myfile.open ("signalout.txt");
-  for (int j = 0; j < rho_xy.size(); j++)
-  {
-    cout << rho_xy.at(j) << endl;
-  }
-  myfile.close();
-
-  return 0;
-
+  //printing rho to txt
+  exportrho(lag, rho_xy);
 }
