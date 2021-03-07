@@ -89,7 +89,8 @@ void removeAve(vector<double> &data)
   }
 }
 
-void shiftx(int duration, vector<double> &new_x, vector<double> &xdata, vector<double> &ydata)
+void shiftx(int duration, vector<double> &new_x, 
+            vector<double> &xdata, vector<double> &ydata)
 {
   for(int i = 0; i < ydata.size() - 1; i++)
   {
@@ -131,12 +132,12 @@ void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
     
     for(int j = 0; j < xdata.size(); j++)
     {
-      r_xy_current = r_xy_current + (new_x[currentIndex] * new_y[currentIndex]);
+      r_xy_current = r_xy_current + 
+                    (new_x[currentIndex] * new_y[currentIndex]);
       currentIndex++;
     }
     
     r_xy.push_back(r_xy_current);
-    //r_xy[i] = r_xy_current;
     new_y.insert(new_y.begin(), 0);
   }
   
