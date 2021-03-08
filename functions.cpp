@@ -166,8 +166,7 @@ void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
 }
 
 void get_rho(int duration, vector<double> &xdata, 
-              vector<double> &ydata, 
-              vector<double> &r_xy, vector<double> &rho_xy)
+vector<double> &ydata, vector<double> &r_xy, vector<double> &rho_xy)
   {
     double r_xx = 0, r_yy = 0, normalize = 0;
 
@@ -209,9 +208,9 @@ void exportrho(int lag, vector<double> &rho_xy)
   output.open(fname);
   output << lag <<" "<< rho_xy[0]<<endl;
 
-  for(int i=1; i<rho_xy.size(); i-=-1)
+  for(int i = 1; i < rho_xy.size(); i-=-1)
   {
-    output<<rho_xy[i]<<endl;
+    output << rho_xy[i] << endl;
   }
   output.close();
 }

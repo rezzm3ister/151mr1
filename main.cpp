@@ -43,6 +43,11 @@ int main()
 
   cout << endl << xend << endl << yend << endl;
 
+  int xend = getEnd(xstart, xdata.size());
+  int yend = getEnd(ystart, ydata.size());
+
+  cout << endl << xend << endl << yend << endl;
+
   removeAve(xdata);
   removeAve(ydata);
 
@@ -50,7 +55,7 @@ int main()
   int lag = xstart - yend;
 
   int duration = xdata.size() + ydata.size() - 1;
-  // isn't this y-x+1?
+  
   vector<double> new_x, new_y;
 
   shiftx(duration, new_x, xdata, ydata);
