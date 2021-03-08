@@ -5,7 +5,6 @@
 #include <sstream>
 #include <string>
 #include "functions.h"
-//#include "functions.cpp"
 using namespace std;
 
 int main()
@@ -15,7 +14,6 @@ int main()
   char dtype = 'x';
   double temp;
   string ttype;
-  ofstream myfile;
  
   while(!datain(xdata, dtype, xstart))
   { //empty since its just an entry check
@@ -27,6 +25,13 @@ int main()
   }
 
 //for testing if it got the whole dataset in, can comment out later
+  cout<<"x start: "<<xstart<<endl;
+  showdata(xdata,"x data: ");
+  cout<<"y start: "<<ystart<<endl;
+
+  showdata(ydata,"y data: ");
+
+/*
   for(int i = 0; i < xdata.size(); i++)
   {
     cout << "start index: " << xstart << endl;
@@ -37,11 +42,7 @@ int main()
     cout << "start index: " << ystart << endl;
     cout << ydata[i] << endl;
   }
-
-  int xend = getEnd(xstart, xdata.size());
-  int yend = getEnd(ystart, ydata.size());
-
-  cout << endl << xend << endl << yend << endl;
+*/
 
   int xend = getEnd(xstart, xdata.size());
   int yend = getEnd(ystart, ydata.size());
@@ -82,7 +83,7 @@ int main()
   //cout check ---
   ttype = "rho_xy";
   showdata(rho_xy,ttype);
-
+  cout<<endl<<endl;
   //printing rho to txt
   exportrho(lag, rho_xy);
 }

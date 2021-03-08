@@ -70,12 +70,23 @@ bool datain(vector<double> &datain, char dtype, int &start)
     fin >> ts;
     if(!isInt(ts,tempi))
     {
-      cout << "not valid file";
-      return 0;
+      cout << "not valid index, checking if valid double\n";
+      if(!isDouble(ts,tempv))
+      {
+        cout<<"error, not a valid signal file.\n";
+        return 0;
+      }
+      else
+      {
+        cout<<"Valid signal file with start index 0 found\n";
+        start = 0;
+        fin.seekg(0, fin.beg);
+      }
     }
     else
     {
-      start = tempv;
+      cout<<"Valid signal file found.\n";
+      start = tempi;
     }
     while(!fin.eof())
     {
