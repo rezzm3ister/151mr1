@@ -12,8 +12,6 @@ bool isDouble(string s, double& value);
 
 bool isInt(string s, int& value);
 
-//bool datain(vector<double> &datastore, char dtype, int &start);
-
 bool datain(vector<double> &datain, char dtype, int &start);
 
 int getEnd(int start, int length);
