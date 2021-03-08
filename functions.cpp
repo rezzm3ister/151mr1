@@ -27,7 +27,28 @@ bool isDouble(string s, double& value)
 
 }
 
-bool datain(vector<double> &datain, char dtype, double &start)
+bool isInt(string s, int& value)
+{
+  int temp; //sets a temp variable
+  bool check = (istringstream(s) >> temp >> ws).eof();
+  //^checks if the content is all numeric ignoring whitespaces
+
+  if(check == 0)
+  {
+    return false;
+    //returns 0 without updating value
+  }
+
+  else
+  {
+    value = temp;
+    return true;
+    //returns 1 and updating value
+  }
+}
+
+
+bool datain(vector<double> &datain, char dtype, int &start)
 {
   
   string fname;
@@ -35,6 +56,7 @@ bool datain(vector<double> &datain, char dtype, double &start)
   getline(cin,fname);
   string ts;
   double tempv;
+  int tempi;
 
   fstream fin;
   fin.open(fname);
@@ -46,7 +68,7 @@ bool datain(vector<double> &datain, char dtype, double &start)
   else
   {
     fin >> ts;
-    if(!isDouble(ts,tempv))
+    if(!isInt(ts,tempi))
     {
       cout << "not valid file";
       return 0;
@@ -180,7 +202,11 @@ void showdata(vector<double> data, string ttype)
 void exportrho(int lag, vector<double> &rho_xy)
 {
   ofstream output;
-  output.open("output_rho.txt");
+  string fname;
+  cout<<"enter output file name: ";
+  cin>>fname;
+
+  output.open(fname);
   output << lag <<" "<< rho_xy[0]<<endl;
 
   for(int i=1; i<rho_xy.size(); i-=-1)

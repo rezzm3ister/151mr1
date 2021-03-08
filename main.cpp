@@ -5,13 +5,13 @@
 #include <sstream>
 #include <string>
 #include "functions.h"
-#include "functions.cpp"
+//#include "functions.cpp"
 using namespace std;
 
 int main()
 {
   vector<double> xdata, ydata;
-  double xstart, ystart;
+  int xstart, ystart;
   char dtype = 'x';
   double temp;
   string ttype;

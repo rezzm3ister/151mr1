@@ -4,15 +4,17 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
-#include "functions.h"
+#include "functions.cpp"
 
 using namespace std;
 
 bool isDouble(string s, double& value);
 
-bool datain(vector<double> &datastore, char dtype, int &start);
+bool isInt(string s, int& value);
 
-bool datain(vector<double> &datain, char dtype, double &start);
+//bool datain(vector<double> &datastore, char dtype, int &start);
+
+bool datain(vector<double> &datain, char dtype, int &start);
 
 int getEnd(int start, int length);
 void removeAve(vector<double> &data);
