@@ -114,7 +114,6 @@ void removeAve(vector<double> &data)
   }
 
   ave = ave / data.size();
-  //cout << endl << "ave = " << ave << endl;
   for(int j = 0; j < data.size(); j++)
   {
     data[j] = data[j] - ave;
