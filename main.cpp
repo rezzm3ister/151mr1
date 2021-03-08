@@ -13,7 +13,6 @@ int main()
   int xstart, ystart;
   char dtype = 'x';
   double temp;
-  string ttype;
  
   while(!datain(xdata, dtype, xstart))
   { //empty since its just an entry check
@@ -24,25 +23,10 @@ int main()
   {//empty since its just an entry check
   }
 
-//for testing if it got the whole dataset in, can comment out later
   cout<<"x start: "<<xstart<<endl;
   showdata(xdata,"x data: ");
   cout<<"y start: "<<ystart<<endl;
-
   showdata(ydata,"y data: ");
-
-/*
-  for(int i = 0; i < xdata.size(); i++)
-  {
-    cout << "start index: " << xstart << endl;
-    cout << xdata[i] << endl;
-  }
-  for(int i = 0; i < ydata.size(); i++)
-  {
-    cout << "start index: " << ystart << endl;
-    cout << ydata[i] << endl;
-  }
-*/
 
   int xend = getEnd(xstart, xdata.size());
   int yend = getEnd(ystart, ydata.size());
@@ -52,7 +36,6 @@ int main()
   removeAve(xdata);
   removeAve(ydata);
 
-  //test code -- move to dedicated functions later
   int lag = xstart - yend;
 
   int duration = xdata.size() + ydata.size() - 1;
@@ -62,28 +45,21 @@ int main()
   shiftx(duration, new_x, xdata, ydata);
   shifty(duration, new_y, ydata);
 
-  //cout check ---
-  ttype = "new x";
-  showdata(new_x, ttype);
-  ttype = "new y";
-  showdata(new_y, ttype);
+  showdata(new_x, "New X: ");
+  showdata(new_y, "New Y: ");
   
-  //another function for r_xy 
+  //solving r_xy and rho_xy
   vector<double> r_xy;
   get_r(duration, r_xy, new_x, xdata, new_y, ydata);
 
-  //cout check ---
-  ttype = "r_xy";
-  showdata(r_xy, ttype);
+  showdata(r_xy, "R_xy");
   
-  //new function for finding rho_xy 
   vector<double> rho_xy;
   get_rho(duration, xdata, ydata, r_xy, rho_xy);
   
-  //cout check ---
-  ttype = "rho_xy";
-  showdata(rho_xy,ttype);
+  showdata(rho_xy,"Rho_xy: ");
   cout<<endl<<endl;
+
   //printing rho to txt
   exportrho(lag, rho_xy);
 }
