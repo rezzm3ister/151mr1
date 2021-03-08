@@ -9,57 +9,59 @@ using namespace std;
 
 int main()
 {
-  vector<double> xdata, ydata;
-  int xstart, ystart;
+  vector<double> xdata, ydata; //vectors containing signal values
+  int xstart, ystart; //starting indices for each signal
   char dtype = 'x';
   double temp;
  
   while(!datain(xdata, dtype, xstart))
-  { //empty since its just an entry check
+  {
+    //loops until valid file is provided
   }
 
   dtype = 'y';
   while(!datain(ydata,dtype,ystart))
-  {//empty since its just an entry check
+  {
+    //loops until valid file is provided
   }
 
+  //shows starting indices and signal values of x and y
   cout<<"x start: "<<xstart<<endl;
-  showdata(xdata,"x data: ");
+  showdata(xdata,"x data");
   cout<<"y start: "<<ystart<<endl;
-  showdata(ydata,"y data: ");
+  showdata(ydata,"y data");
 
-  int xend = getEnd(xstart, xdata.size());
-  int yend = getEnd(ystart, ydata.size());
-
-  cout << endl << xend << endl << yend << endl;
-
+  //remove averages from each signal value
   removeAve(xdata);
   removeAve(ydata);
 
-  int lag = xstart - yend;
+  //int xend = getEnd(xstart, xdata.size());
 
+  int yend = getEnd(ystart, ydata.size());
+  int lag = xstart - yend; //lag is the starting index for rho_xy
   int duration = xdata.size() + ydata.size() - 1;
   
-  vector<double> new_x, new_y;
+  vector<double> new_x, new_y; //shifted vectors for calculations
 
+  //shift vectors such that first value of x and last value of y are aligned 
   shiftx(duration, new_x, xdata, ydata);
   shifty(duration, new_y, ydata);
 
-  showdata(new_x, "New X: ");
-  showdata(new_y, "New Y: ");
+  showdata(new_x, "shifted x");
+  showdata(new_y, "shifted y");
   
   //solving r_xy and rho_xy
   vector<double> r_xy;
   get_r(duration, r_xy, new_x, xdata, new_y, ydata);
 
-  showdata(r_xy, "R_xy");
+  showdata(r_xy, "r_xy");
   
   vector<double> rho_xy;
   get_rho(duration, xdata, ydata, r_xy, rho_xy);
   
-  showdata(rho_xy,"Rho_xy: ");
-  cout<<endl<<endl;
+  showdata(rho_xy,"rho_xy");
+  cout<<endl;
 
-  //printing rho to txt
+  //printing rho_xy as a valid signal file
   exportrho(lag, rho_xy);
 }

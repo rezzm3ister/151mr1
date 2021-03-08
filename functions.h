@@ -1,9 +1,6 @@
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <sstream>
+
 #include "functions.cpp"
 
 using namespace std;

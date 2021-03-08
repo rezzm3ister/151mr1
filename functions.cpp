@@ -9,8 +9,9 @@ using namespace std;
 bool isDouble(string s, double& value)
 {
   double temp; //sets a temp variable
+  
+  //checks if the content is a valid double ignoring whitespaces
   bool check = (istringstream(s) >> temp >> ws).eof();
-  //^checks if the content is all numeric ignoring whitespaces
 
   if(check == 0)
   {
@@ -30,8 +31,9 @@ bool isDouble(string s, double& value)
 bool isInt(string s, int& value)
 {
   int temp; //sets a temp variable
+
+  //checks if the content is a valid int ignoring whitespaces
   bool check = (istringstream(s) >> temp >> ws).eof();
-  //^checks if the content is all numeric ignoring whitespaces
 
   if(check == 0)
   {
@@ -47,64 +49,79 @@ bool isInt(string s, int& value)
   }
 }
 
-
 bool datain(vector<double> &datain, char dtype, int &start)
 {
-  
   string fname;
   cout << "File Name for " << dtype << ": ";
-  getline(cin,fname);
-  string ts;
-  double tempv;
-  int tempi;
+  getline(cin,fname); //take user input filename
+  string ts; //string being read in file
+  double tempv; //temp storage for valid doubles
+  int tempi; //temp storage for valid start index
 
   fstream fin;
   fin.open(fname);
-  if(!fin)
+  if(!fin) //if file not found/invalid, throw error
   {
-    cout<<"error, file not detected. try again.\n";
+    cout<<"Error, file not detected. try again.\n";
     return 0;
   }
-  else
+  else //check for possible index on first line
   {
-    fin >> ts;
+    fin >> ts; //check first string in file
+
+    //if not int, either no specified index or invalid file
     if(!isInt(ts,tempi))
     {
-      cout << "not valid index, checking if valid double\n";
+      cout << "Index not specified, checking if valid double\n";
+      
+      //if first entry is not double, invalid file
       if(!isDouble(ts,tempv))
       {
-        cout<<"error, not a valid signal file.\n";
+        cout<<"Error, not a valid signal file.\n";
         return 0;
       }
-      else
+      else //if double, set index to 0
       {
         cout<<"Valid signal file with start index 0 found\n";
         start = 0;
+
+        //returns to start of file so it may read signal value
         fin.seekg(0, fin.beg);
       }
     }
-    else
+    else //if int, set as start index
     {
       cout<<"Valid signal file found.\n";
       start = tempi;
     }
-    while(!fin.eof())
+
+    while(!fin.eof()) //reads until end of file
     {
-      fin>>ts;
-      if(isDouble(ts,tempv))
+      fin >> ts; //reads the first string in a line
+
+      //if double and not blank
+      if((isDouble(ts,tempv)) && (ts != ""))
       {
-        datain.push_back(tempv);
+        datain.push_back(tempv); //add value to data vector
       }
+      else
+      {
+        break; //ends when start of line is not valid signal value
+      }
+      
+      getline(fin,ts); //skips the rest of the line
     }
   }
   return 1;
 }
 
+//takes the end index of a signal
 int getEnd(int start, int length)
 {
   return start + length - 1;
 }
 
+//subtracts the average of all signal values from each index
 void removeAve(vector<double> &data)
 {
   double ave = 0;
@@ -113,26 +130,27 @@ void removeAve(vector<double> &data)
     ave = ave + data[i];
   }
 
-  ave = ave / data.size();
-  //cout << endl << "ave = " << ave << endl;
+  ave = ave / data.size(); //gets the average of signal values
   for(int j = 0; j < data.size(); j++)
   {
-    data[j] = data[j] - ave;
-    //cout << data[j] << ",";
+    data[j] = data[j] - ave; //subtracts average from signal values
   }
 }
 
 void shiftx(int duration, vector<double> &new_x, 
-            vector<double> &xdata, vector<double> &ydata)
+  vector<double> &xdata, vector<double> &ydata)
 {
+  //adds zeroes before the vector to account for shifted y
   for(int i = 0; i < ydata.size() - 1; i++)
   {
     new_x.push_back(0);
   }
+  //outputs the original x vector
   for(int j = 0; j < xdata.size(); j++)
   {
     new_x.push_back(xdata[j]);
   }
+  //adds the same number of zeroes after the vector 
   for(int k = 0; k < ydata.size() - 1; k++)
   {
     new_x.push_back(0);
@@ -141,10 +159,12 @@ void shiftx(int duration, vector<double> &new_x,
 
 void shifty(int duration, vector<double> &new_y, vector<double> ydata)
 {
+  //outputs the original y vector
   for(int i = 0; i < ydata.size(); i++)
   {
     new_y.push_back(ydata[i]);
   }
+  //adds zeroes so that the sum of products for r_xy can be performed
   for(int j = ydata.size(); j < duration; j++)
   {
     new_y.push_back(0);
@@ -152,63 +172,77 @@ void shifty(int duration, vector<double> &new_y, vector<double> ydata)
 }
 
 void get_r(int duration, vector<double> &r_xy, vector<double> &new_x,
-          vector<double> &xdata, vector<double> &new_y,
-          vector<double> &ydata)
+  vector<double> &xdata, vector<double> &new_y, vector<double> &ydata)
 {
-  double r_xy_current = 0;
-  int currentIndex = 0;
+  double r_xy_current = 0; //sum of products value for current index
+  int currentIndex = 0; //current index of values being multiplied
 
-   for(int i = 0; i < duration; i++)
+   for(int i = 0; i < duration; i++) //loops for each lag value
   {
-    r_xy_current = 0;
-    currentIndex = ydata.size() - 1;
+    r_xy_current = 0; //sets current value to 0 at the start
+    currentIndex = ydata.size() - 1; //first index with an x value
     
+    //sum of products for the range of indices containing x values
     for(int j = 0; j < xdata.size(); j++)
     {
+      //sum of products for current index
       r_xy_current = r_xy_current + 
-                    (new_x[currentIndex] * new_y[currentIndex]);
+        (new_x[currentIndex] * new_y[currentIndex]);
+      
       currentIndex++;
     }
     
-    r_xy.push_back(r_xy_current);
-    new_y.insert(new_y.begin(), 0);
-  }
-  
+    r_xy.push_back(r_xy_current); //add value to vector
+    new_y.insert(new_y.begin(), 0); //shift y vector to the right by 1
+  }  
 }
 
 void get_rho(int duration, vector<double> &xdata, 
 vector<double> &ydata, vector<double> &r_xy, vector<double> &rho_xy)
+{
+  double r_xx = 0, r_yy = 0, normalize = 0;
+  
+  //autocorrelation of x
+  for(int i = 0; i < xdata.size(); i++)
   {
-    double r_xx = 0, r_yy = 0, normalize = 0;
-
-    for(int i = 0; i < xdata.size(); i++)
-    {
-      r_xx = r_xx + (xdata[i]*xdata[i]);
-    }
-
-    for(int i = 0; i < ydata.size(); i++)
-    {
-      r_yy = r_yy + (ydata[i]*ydata[i]);
-    }
-
-    normalize = sqrt(r_xx*r_yy);
-
-    for(int i = 0; i < duration; i++)
-    {
-      rho_xy.push_back(r_xy[i] / normalize);
-    }
+    r_xx = r_xx + (xdata[i]*xdata[i]);
   }
+  
+  //autocorrelation of y
+  for(int i = 0; i < ydata.size(); i++)
+  {
+    r_yy = r_yy + (ydata[i]*ydata[i]);
+  }
+  
+  //normalization coefficient
+  normalize = sqrt(r_xx*r_yy);
+  
+  //divide each value of r_xy by normalization coefficient
+  for(int i = 0; i < duration; i++)
+  {
+    rho_xy.push_back(r_xy[i] / normalize);
+  }
+}
 
+//for showing necessary data
 void showdata(vector<double> data, string ttype)
 {
-  cout << ttype << " = ";
+  cout << ttype << ": ";
   for(int i = 0; i < data.size(); i++)
   {
-    cout << data[i] << ", ";
+    if(i == data.size() - 1)
+    {
+      cout << data[i];
+    }
+    else
+    {
+      cout << data[i] << ", ";
+    }
   }
   cout << endl;
 }
 
+//for exporting to output file
 void exportrho(int lag, vector<double> &rho_xy)
 {
   ofstream output;
@@ -217,11 +251,11 @@ void exportrho(int lag, vector<double> &rho_xy)
   cin>>fname;
 
   output.open(fname);
-  output << lag <<" "<< rho_xy[0]<<endl;
+  output << lag <<" "<< rho_xy[0]<<endl; //write start index
 
-  for(int i = 1; i < rho_xy.size(); i-=-1)
+  for(int i = 1; i < rho_xy.size(); i++)
   {
-    output << rho_xy[i] << endl;
+    output << rho_xy[i] << endl; //write one value per line
   }
   output.close();
 }
