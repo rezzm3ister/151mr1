@@ -62,7 +62,7 @@ bool datain(vector<double> &datain, char dtype, int &start)
   fin.open(fname);
   if(!fin) //if file not found/invalid, throw error
   {
-    cout<<"Error, file not detected. try again.\n";
+    cout<<"Error, file not detected. Try again.\n\n";
     return 0;
   }
   else //check for possible index on first line
@@ -72,17 +72,17 @@ bool datain(vector<double> &datain, char dtype, int &start)
     //if not int, either no specified index or invalid file
     if(!isInt(ts,tempi))
     {
-      cout << "Index not specified, checking if valid double\n";
+      cout << "Index not specified, checking if valid double.\n";
       
       //if first entry is not double, invalid file
       if(!isDouble(ts,tempv))
       {
-        cout<<"Error, not a valid signal file.\n";
+        cout<<"Error, not a valid signal file.\n\n";
         return 0;
       }
       else //if double, set index to 0
       {
-        cout<<"Valid signal file with start index 0 found\n";
+        cout<<"Valid signal file with start index 0 found.\n\n";
         start = 0;
 
         //returns to start of file so it may read signal value
@@ -91,7 +91,7 @@ bool datain(vector<double> &datain, char dtype, int &start)
     }
     else //if int, set as start index
     {
-      cout<<"Valid signal file found.\n";
+      cout<<"Valid signal file found.\n\n";
       start = tempi;
     }
 
