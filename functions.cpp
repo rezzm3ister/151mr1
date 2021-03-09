@@ -89,10 +89,28 @@ bool datain(vector<double> &datain, char dtype, int &start)
         fin.seekg(0, fin.beg);
       }
     }
-    else //if int, set as start index
+    else //if first entry is int
     {
-      cout<<"Valid signal file found.\n\n";
-      start = tempi;
+      getline(fin,ts); //read the rest of the first line
+  
+      stringstream ss(ts);
+      string ts2;
+      ss >> ts2; //read string after the first int
+
+      //if followed by double, first int is index
+      if((isDouble(ts2,tempv)) && (!ts2.empty()))
+      {
+        cout<<"Valid signal file found.\n\n";
+        start = tempi;
+        fin.seekg(0, fin.beg);
+        fin >> ts; //go to second string
+      }
+      else //if no double after, first int is signal value
+      {
+        cout<<"Valid signal file with start index 0 found.\n\n";
+        fin.seekg(0, fin.beg);
+        start = 0;
+      }
     }
 
     while(!fin.eof()) //reads until end of file
