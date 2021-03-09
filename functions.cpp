@@ -148,6 +148,7 @@ void removeAve(vector<double> &data)
     ave = ave + data[i];
   }
 
+
   ave = ave / data.size(); //gets the average of signal values
   for(int j = 0; j < data.size(); j++)
   {
