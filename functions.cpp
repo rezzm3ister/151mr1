@@ -105,7 +105,7 @@ bool datain(vector<double> &datain, char dtype, int &start)
         fin.seekg(0, fin.beg);
         fin >> ts; //go to second string
       }
-      else //if no double after, first int is signal value
+      else //if no double after, first value is signal value
       {
         cout<<"Valid signal file with start index 0 found.\n\n";
         fin.seekg(0, fin.beg);
